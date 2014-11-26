@@ -13,8 +13,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    cpu.cpp \
+    instruction.cpp \
+    memory.cpp \
+    parser.cpp \
+    registerfile.cpp \
+    controlunit.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    cpu.h \
+    instruction.h \
+    memory.h \
+    parser.h \
+    registerfile.h \
+    controlunit.h
 
 FORMS    += mainwindow.ui
