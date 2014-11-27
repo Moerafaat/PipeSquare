@@ -30,3 +30,6 @@ HEADERS  += mainwindow.h \
     controlunit.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

@@ -1,5 +1,4 @@
 #include "registerfile.h"
 
-RegisterFile::RegisterFile()
-{
+RegisterFile::RegisterFile(){
 }

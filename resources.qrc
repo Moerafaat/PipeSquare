@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>open.png</file>
+        <file>step.png</file>
+        <file>compile.png</file>
+    </qresource>
+</RCC>
