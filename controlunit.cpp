@@ -1,5 +1,4 @@
 #include "controlunit.h"
 
-ControlUnit::ControlUnit()
-{
+ControlUnit::ControlUnit(){
 }

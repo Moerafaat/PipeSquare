@@ -1,24 +1,24 @@
 #ifndef CPU_H
 #define CPU_H
 
-#include<QVector>
-#include"instruction.h"
-#include"memory.h"
-#include"registerfile.h"
-#include"controlunit.h"
+#include <QVector>
+#include "instruction.h"
+#include "memory.h"
+#include "registerfile.h"
+#include "controlunit.h"
 
-class CPU
-{
+class CPU{
     Memory mem;
     RegisterFile RegFile;
     QVector<Instruction> IMem;
     ControlUnit CU;
 
 public:
-    CPU(const QVector<Instruction>&);
+    CPU();
     CPU(const CPU&);
-    CPU& operator=(const& CPU);
+    CPU& operator=(const CPU&);
 
+    void SetVector();
     void Fetch();
     void Read();
     void Execute();
