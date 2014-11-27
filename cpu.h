@@ -7,8 +7,7 @@
 #include"registerfile.h"
 #include"controlunit.h"
 
-class CPU
-{
+class CPU{
     Memory mem;
     RegisterFile RegFile;
     QVector<Instruction> IMem;
@@ -17,7 +16,7 @@ class CPU
 public:
     CPU(const QVector<Instruction>&);
     CPU(const CPU&);
-    CPU& operator=(const& CPU);
+    CPU& operator=(const CPU&);
 
     void Fetch();
     void Read();

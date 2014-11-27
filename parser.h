@@ -7,7 +7,7 @@
 class Parser
 {
 public:
-    QVector<Instruction> parse(std::istream = cin);
+    QVector<Instruction> parse(std::istream = std::cin);
 };
 
 #endif // PARSER_H
