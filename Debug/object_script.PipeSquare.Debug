@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\cpu.o
+./debug\instruction.o
+./debug\memory.o
+./debug\parser.o
+./debug\registerfile.o
+./debug\controlunit.o
+./debug\qrc_resources.o
+./debug\moc_mainwindow.o
+);
