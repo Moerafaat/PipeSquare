@@ -1,0 +1,103 @@
+QMainWindow{
+    background-color: #dddddd;
+}
+
+QStatusBar{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                              stop:0 #858282, stop:1 #585757);
+}
+
+QMenuBar{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #858282, stop:1 #585757);
+}
+
+QMenuBar::item{
+    spacing: 3px;
+    padding: 1px 4px;
+    background: transparent;
+    border-radius: 4px;
+    color: #dddddd;
+}
+
+QMenuBar::item:selected{
+    background: #b6b6b6;
+    color: black;
+}
+
+QMenuBar::item:pressed{
+    background: #a1a1a1;
+    color: black;
+}
+
+QMenu{
+    background-color: #a1a1a1;
+    border: 1px solid black;
+}
+
+QMenu::item{
+    background-color: transparent;
+}
+
+QMenu::item:selected{
+    background-color: #585757;
+}
+
+QToolBar{
+    border: 1px solid #585757;
+    font-weight: bold;
+    background-color: #a5a4a4;
+}
+
+QTabWidget::pane{
+    border: 1px solid #585757;
+}
+
+ QTabWidget::tab-bar{
+    left: 0px;
+}
+
+QTabBar::tab{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                  stop:0 #858282, stop:1 #585757);
+    color: #dddddd;
+    border: 2px solid #585757;
+    border-bottom-color: #585757;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 8ex;
+    padding: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover{
+    color: black;
+
+}
+
+QTabBar::tab:selected{
+    background: #a5a4a4;
+    border-color: #585757;
+    border-bottom-color: #585757;
+}
+
+QTabBar::tab:!selected{
+    margin-top: 2px;
+}
+
+QLabel{
+    color: #dddddd;
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                  stop:0 #858282, stop:1 #585757);
+}
+
+QTextEdit{
+    border: 1px solid #585757;
+}
+
+QPlainTextEdit{
+    border: 1px solid #585757;
+}
+
+QTableView{
+    border: 1px solid #585757;
+}

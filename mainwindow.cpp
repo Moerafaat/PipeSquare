@@ -15,12 +15,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     for(int i=0; i<ui->tablewidget_regfile->rowCount(); i++){
         ui->tablewidget_regfile->setVerticalHeaderItem(i, new QTableWidgetItem(QString::number(i)));
     }
-    for(int i=0; i<ui->tablewidget_memory->rowCount(); i++){
-        ui->tablewidget_memory->setVerticalHeaderItem(i, new QTableWidgetItem(QString::number(i)));
-    }
     ui->tablewidget_memory->setColumnCount(1);
     ui->tablewidget_memory->setRowCount(32);
     ui->tablewidget_memory->setHorizontalHeaderItem(0, new QTableWidgetItem("Content"));
+    for(int i=0; i<ui->tablewidget_memory->rowCount(); i++){
+        ui->tablewidget_memory->setVerticalHeaderItem(i, new QTableWidgetItem(QString::number(i)));
+    }
 }
 
 MainWindow::~MainWindow(){

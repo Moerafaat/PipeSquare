@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>775</width>
-    <height>474</height>
+    <width>1010</width>
+    <height>687</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,10 +23,10 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>280</y>
+      <x>730</x>
+      <y>470</y>
       <width>281</width>
-      <height>111</height>
+      <height>141</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -42,7 +42,7 @@
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>91</height>
+        <height>121</height>
        </rect>
       </property>
      </widget>
@@ -57,7 +57,7 @@
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>91</height>
+        <height>131</height>
        </rect>
       </property>
      </widget>
@@ -72,7 +72,7 @@
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>91</height>
+        <height>131</height>
        </rect>
       </property>
      </widget>
@@ -87,26 +87,32 @@
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>91</height>
+        <height>131</height>
        </rect>
       </property>
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>431</width>
-      <height>261</height>
+      <x>0</x>
+      <y>0</y>
+      <width>261</width>
+      <height>451</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_editor">
        <property name="text">
         <string>Editor</string>
+       </property>
+       <property name="margin">
+        <number>5</number>
        </property>
       </widget>
      </item>
@@ -115,20 +121,26 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>290</y>
-      <width>431</width>
-      <height>101</height>
+      <x>0</x>
+      <y>470</y>
+      <width>711</width>
+      <height>141</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>Log</string>
+       </property>
+       <property name="margin">
+        <number>5</number>
        </property>
       </widget>
      </item>
@@ -137,20 +149,26 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>10</y>
-      <width>131</width>
-      <height>261</height>
+      <x>870</x>
+      <y>0</y>
+      <width>141</width>
+      <height>451</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_memory">
        <property name="text">
         <string>Memory</string>
+       </property>
+       <property name="margin">
+        <number>5</number>
        </property>
       </widget>
      </item>
@@ -159,20 +177,26 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>10</y>
-      <width>131</width>
-      <height>261</height>
+      <x>730</x>
+      <y>0</y>
+      <width>141</width>
+      <height>451</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_regfile">
        <property name="text">
         <string>Register File</string>
+       </property>
+       <property name="margin">
+        <number>5</number>
        </property>
       </widget>
      </item>
@@ -181,23 +205,77 @@
      </item>
     </layout>
    </widget>
-   <zorder>textedit_editor</zorder>
-   <zorder>plaintextedit_log</zorder>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>450</y>
+      <width>991</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>10</y>
+      <width>20</width>
+      <height>591</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>0</y>
+      <width>451</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_pipeline">
+       <property name="text">
+        <string>Pipeline Diagram</string>
+       </property>
+       <property name="margin">
+        <number>5</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableView" name="tableView"/>
+     </item>
+    </layout>
+   </widget>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>tabWidget</zorder>
-   <zorder>tablewidget_memory</zorder>
+   <zorder>tableView</zorder>
+   <zorder>label_pipeline</zorder>
+   <zorder>line</zorder>
+   <zorder>line_2</zorder>
    <zorder>tablewidget_regfile</zorder>
-   <zorder>label_editor</zorder>
-   <zorder>label_regfile</zorder>
-   <zorder>label_memory</zorder>
-   <zorder>label_4</zorder>
-   <zorder>label_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>775</width>
+     <width>1010</width>
      <height>21</height>
     </rect>
    </property>
