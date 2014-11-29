@@ -1,43 +1,33 @@
 #include "cpu.h"
 
-CPU::CPU()
-{
-    
+CPU::CPU(){
 }
-
-CPU::CPU(const CPU &temp)
-{
+CPU::CPU(const CPU &temp){
   this->mem=temp.mem;
-  this->IMem=temp.Imem;
+  this->IMem=temp.IMem;
   this->RegFile=temp.RegFile;
   this->CU=temp.CU;
 }
-
-CPU::CPU operator =(const CPU& temp)
-{
+CPU& CPU::operator=(const CPU& temp){
     this->mem=temp.mem;
-    this->IMem=temp.Imem;
+    this->IMem=temp.IMem;
     this->RegFile=temp.RegFile;
     this->CU=temp.CU;
+    return *this;
 }
 
-void CPU:: Fetch()
-{
+void CPU:: Fetch(){
     CU.Step(IMem[CU.getPC()]);
 }
-
-void CPU::Read()
-{
+void CPU::Read(){
     CU.setData0(CU.getRead0());
     CU.setData1(CU.getRead1());
 }
-
-void CPU::Execute()
-{
+void CPU::Execute(){
     int tOp0 = CU.getOp0();
     int tOp1 = CU.getOp1();
     int tALUop = CU.getALUOp();
-    switch (tALUop)
+    switch (tALUop){
     case 0:
         CU.setALUres(tOp0+tOp1);//ADD or ADDI or SW or LW
         break;
@@ -56,33 +46,28 @@ void CPU::Execute()
         else CU.setALUres(0);
         break;
     default:
-        CU.setALUres(tOp0);
-
+           CU.setALUres(tOp0);
+    }
 }
 
-void CPU::Mem()
-{
+void CPU::Mem(){
     CU.setMemRData0(mem[CU.getMemAddr0()]);
     if (CU.getMemWR()) mem[CU.getMemAddr0()]= CU.getMemWData0();
 }
 
-void CPU::WriteBack()
-{
+void CPU::WriteBack(){
    if (CU.getWE()) RegFile[CU.getWAddr0()]= CU.getWData0();
 }
 
-void CPU::Branch()
-{
+void CPU::Branch(){
 
 }
 
-bool CPU::Step()
-{
+bool CPU::Step(){
 
 }
 
-bool CPU::EOI()
-{
+bool CPU::EOI(){
 
 }
 

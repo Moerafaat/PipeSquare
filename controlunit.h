@@ -12,19 +12,22 @@ class ControlUnit{
         int jaddr;
     };
     struct ID_EX{
-        bool WE, MemWR;        
+        bool WE, MemRW;
+        bool ALU_MEM;
+        bool IsDMemAddr, IsIMemAddr;
         int ALUop;
         
         int Op0, Op1;
-        int Data0;
+        int WData0;
         int WAddr0;
     };
     struct EX_MEM{
-        bool WE, MemWR;
+        bool WE, MemRW;
+        bool ALU_MEM;
         
         int MemAddr0;
         int WAddr0;
-        int Data0;
+        int WData0;
     };
     struct MEM_WB{
         bool WE;
@@ -39,9 +42,8 @@ class ControlUnit{
     unsigned int PC;
     QQueue<Instruction> InstQ;
     
-    void Propagate();
     void Decode();
-    
+    bool isIMMasOp1(const InstType);
 public:
     ControlUnit();
 
@@ -67,6 +69,10 @@ public:
     bool getWE();
     int getWAddr0();
     int getWData0();
+    
+    void Propagate12();
+    void Propagate23();
+    void Propagate34();
 };
 
 #endif // CONTROLUNIT_H

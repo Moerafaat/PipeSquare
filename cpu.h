@@ -18,13 +18,13 @@ public:
     CPU(const CPU&);
     CPU& operator=(const CPU&);
 
-    void SetVector(); //beye3mel eh dah??
-    void Fetch();//
-    void Read();//
-    void Execute();//
-    void Mem();//
-    void WriteBack();//
-    void Branch();//
+    void SetVector(const QVector<Instruction>&); //beye3mel eh dah?? btset el IMem mn el parser
+    void Fetch();
+    void Read();
+    void Execute();
+    void Mem();
+    void WriteBack();
+    void Branch();
 
     bool Step();    //Takes elements from GUI to update
     bool EOI();     //End of Instructions

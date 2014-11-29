@@ -1,5 +1,10 @@
 #include "controlunit.h"
 
+bool ControlUnit::isIMMasOp1(const InstType v){
+    //enum InstType{ADD, ADDI, XOR, LW, SW, BLE, J, SLT, JAL, JR, BEQ, OR, SUBI};
+    return v == ADDI || v == LW || v == SW || v == SUBI;
+}
+
 ControlUnit::ControlUnit() : PC(0){
 }
 
@@ -34,6 +39,18 @@ int ControlUnit::getRead0(){
 int ControlUnit::getRead1(){
     return b1.rt;
 }
+void ControlUnit::setData0(int val){
+    if(b4.WE && b4.WAddr0 == b1.rs) val = b4.WData0;    //Forwarding from the output of the Memory Read
+    if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rs) val = b3.WData0;  //Forwarding from ALU output
+    b2.Op0 = val;
+}
+void ControlUnit::setData1(int val){
+    if(b4.WE && b4.WAddr0 == b1.rs) val = b4.WData0;    //Forwarding from the output of the Memory Read
+    if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rs) val = b3.WData0;  //Forwarding from ALU output
+    
+    if(isIMMasOp1(b1.Mnemonic)) b2.WData0 = val;
+    else b2.Op0 = val;
+}
 
 int ControlUnit::getOp0(){
     return b2.Op0;
@@ -44,6 +61,10 @@ int ControlUnit::getOp1(){
 int ControlUnit::getALUOp(){
     return b2.ALUop;
 }
+void ControlUnit::setALUres(int val){
+    if(b2.IsDMemAddr) b3.MemAddr0 = val;
+    else b3.WData0 = val;
+}
 
 bool ControlUnit::getMemWR(){
     return b3.MemWR;
@@ -52,7 +73,11 @@ int ControlUnit::getMemAddr0(){
     return b3.MemAddr0;
 }
 int ControlUnit::getMemWData0(){
-    return b3.Data0;
+    return b3.WData0;
+}
+void ControlUnit::setMemRData0(int val){
+    if(b3.ALU_MEM) b4.WData0 = val;
+    else b4.WData0 = b3.WData0;
 }
 
 bool ControlUnit::getWE(){
