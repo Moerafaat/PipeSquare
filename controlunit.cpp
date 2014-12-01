@@ -67,7 +67,7 @@ void ControlUnit::setALUres(int val){
 }
 
 bool ControlUnit::getMemWR(){
-    return b3.MemWR;
+    return b3.MemRW;
 }
 int ControlUnit::getMemAddr0(){
     return b3.MemAddr0;

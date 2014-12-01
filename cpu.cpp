@@ -70,4 +70,3 @@ bool CPU::Step(){
 bool CPU::EOI(){
 
 }
-

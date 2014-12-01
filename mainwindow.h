@@ -6,12 +6,11 @@
 #include "cpu.h"
 #include <QFile>
 
-namespace Ui {
+namespace Ui{
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow{
     Q_OBJECT
 
 public:

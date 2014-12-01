@@ -7,6 +7,8 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
+    QIcon icon(":/images/logo.png");
+    QWidget::setWindowIcon(icon);
     ui->textedit_editor->setReadOnly(true);
     ui->plaintextedit_log->setReadOnly(true);
     ui->tablewidget_regfile->setColumnCount(1);
