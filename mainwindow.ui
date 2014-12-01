@@ -255,7 +255,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTableView" name="tableView"/>
+      <widget class="QTableWidget" name="tablewidget_pipeline"/>
      </item>
     </layout>
    </widget>
@@ -263,12 +263,11 @@
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>tabWidget</zorder>
-   <zorder>tableView</zorder>
-   <zorder>label_pipeline</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
-   <zorder>tablewidget_regfile</zorder>
+   <zorder>tablewidget_pipeline</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
