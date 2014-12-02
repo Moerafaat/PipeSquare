@@ -2,6 +2,7 @@
 #define CPU_H
 
 #include <QVector>
+#include <functional>
 #include "instruction.h"
 #include "memory.h"
 #include "registerfile.h"
@@ -12,6 +13,7 @@ class CPU{
     RegisterFile RegFile;
     QVector<Instruction> IMem;
     ControlUnit CU;
+    bool Farray[5];
 
 public:
     CPU();
