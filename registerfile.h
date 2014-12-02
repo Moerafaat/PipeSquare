@@ -10,7 +10,8 @@ public:
     RegisterFile();
     RegisterFile(const RegisterFile&);
     RegisterFile& operator=(const RegisterFile&);
-    int& operator[](unsigned int);
+    int operator[](unsigned int)const;
+    int &operator[](unsigned int);
 };
 
 #endif // REGISTERFILE_H

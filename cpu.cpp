@@ -63,7 +63,7 @@ void CPU::Mem(){
 
 void CPU::WriteBack(){
    if (Farray[4])
-    {if (CU.getWE()) RegFile[CU.getWAddr0()]= CU.getWData0();}
+    {if (CU.getWE()) RegFile[CU.getWAddr0()] = CU.getWData0();}
 }
 
 void CPU::Branch(){
