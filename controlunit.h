@@ -43,7 +43,7 @@ class ControlUnit{
     QQueue<Instruction> InstQ;
     
     void Decode();
-    bool isIMMasOp1(const InstType);
+    bool isIMMasOp1(const InstType); //(is immediate as Op1) returns whether instruction is I format
 public:
     ControlUnit();
 
@@ -70,9 +70,9 @@ public:
     int getWAddr0();
     int getWData0();
     
-    void Propagate12();
-    void Propagate23();
-    void Propagate34();
+    void Propagate12(); // Propagates from buffer 1 to 2
+    void Propagate23(); // Propagates from buffer 2 to 3
+    void Propagate34(); // Propagates from buffer 3 to 4
 };
 
 #endif // CONTROLUNIT_H
