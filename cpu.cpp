@@ -26,8 +26,8 @@ void CPU:: Fetch(){
 }
 void CPU::Read(){
     if (Farray[1])
-    {CU.setData0(CU.getRead0());
-    CU.setData1(CU.getRead1());}
+    {CU.setData0(CU.getRAddr0());
+    CU.setData1(CU.getRAddr1());}
 }
 void CPU::Execute(){
     if (Farray[2])
@@ -46,7 +46,7 @@ void CPU::Execute(){
             CU.setALUres(tOp0|tOp1);//OR
             break;
         case 3:
-            CU.setALUres(tOp0-tOp1);//SUBI
+            CU.setALUres(tOp0-tOp1);//SUBI or BLE or BEQ
             break;
         case 4://SLT
             if (tOp0<tOp1)

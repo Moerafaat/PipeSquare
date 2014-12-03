@@ -14,22 +14,27 @@ class ControlUnit{
     struct ID_EX{
         bool WE, MemRW;
         bool ALU_MEM;
-        bool IsDMemAddr, IsIMemAddr;
+        bool IsDMemAddr;
         int ALUop;
-        
+        int IsComparator;
+        bool IsIdle;    //Used only for stalling
+
         int Op0, Op1;
-        int WData0;
+        int Data0;
         int WAddr0;
     };
     struct EX_MEM{
         bool WE, MemRW;
         bool ALU_MEM;
-        
+        bool IsIdle;     //Used only for stalling
+
         int MemAddr0;
         int WAddr0;
         int WData0;
     };
     struct MEM_WB{
+        bool IsIdle;     //Used only for stalling
+
         bool WE;
         int WAddr0;
         int WData0;
@@ -41,18 +46,18 @@ class ControlUnit{
     MEM_WB b4;
     unsigned int PC;
     QQueue<Instruction> InstQ;
-    
+    int BranchStall;
     void Decode();
     bool isIMMasOp1(const InstType); //(is immediate as Op1) returns whether instruction is I format
 public:
     ControlUnit();
 
-    void Step(const Instruction&);
+    int Step(const Instruction&);
     unsigned int nInstructions();
     unsigned int getPC();
     
-    int getRead0();
-    int getRead1();
+    int getRAddr0();
+    int getRAddr1();
     void setData0(int);
     void setData1(int);
     
