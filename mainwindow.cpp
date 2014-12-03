@@ -116,6 +116,7 @@ void MainWindow::on_actionStep_triggered(){
         item->setTextAlignment(Qt::AlignCenter);
         item->setFont(font);
         item->setForeground(color[map.key(map[ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!is_stall), cycle-1)->text()]+(i >= stall_count))]);
+        if (i < stall_count && is_stall) item->setBackgroundColor(QColor::fromRgb(160,160,160));
         ui->tablewidget_pipeline->setItem(ui->tablewidget_pipeline->rowCount()-1-i-(!is_stall), cycle, item);
     }
 
