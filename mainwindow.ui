@@ -20,85 +20,12 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>470</y>
-      <width>281</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="IF_ID">
-     <attribute name="title">
-      <string>IF/ID</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidget_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>281</width>
-        <height>121</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="ID_EX">
-     <attribute name="title">
-      <string>ID/EX</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidget_4">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>281</width>
-        <height>131</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="EX_MEM">
-     <attribute name="title">
-      <string>EX/MEM</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidget_5">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>281</width>
-        <height>131</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="MEM_WB">
-     <attribute name="title">
-      <string>MEM/WB</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidget_6">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>281</width>
-        <height>131</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>261</width>
+      <width>211</width>
       <height>451</height>
      </rect>
     </property>
@@ -178,9 +105,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>210</x>
       <y>0</y>
-      <width>451</width>
+      <width>501</width>
       <height>451</height>
      </rect>
     </property>
@@ -265,6 +192,79 @@
      </item>
     </layout>
    </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>470</y>
+      <width>281</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="IF_ID">
+     <attribute name="title">
+      <string>IF/ID</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>281</width>
+        <height>121</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="ID_EX">
+     <attribute name="title">
+      <string>ID/EX</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>281</width>
+        <height>131</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="EX_MEM">
+     <attribute name="title">
+      <string>EX/MEM</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>281</width>
+        <height>131</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="MEM_WB">
+     <attribute name="title">
+      <string>MEM/WB</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>281</width>
+        <height>131</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
@@ -273,6 +273,7 @@
    <zorder>tabWidget</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
+   <zorder>tabWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

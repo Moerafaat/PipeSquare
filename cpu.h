@@ -20,7 +20,7 @@ public:
     CPU(const CPU&);
     CPU& operator=(const CPU&);
 
-    void SetVector(const QVector<Instruction>&); //beye3mel eh dah?? btset el IMem mn el parser
+    void SetVector(const QVector<Instruction>&);
     void Fetch();
     void Read();
     void Execute();

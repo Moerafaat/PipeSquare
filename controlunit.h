@@ -61,7 +61,7 @@ public:
     int getALUOp();
     void setALUres(int);
     
-    bool getMemWR();
+    bool getMemRW();
     int getMemAddr0();
     int getMemWData0();
     void setMemRData0(int);

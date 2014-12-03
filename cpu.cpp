@@ -16,6 +16,10 @@ CPU& CPU::operator=(const CPU& temp){
     return *this;
 }
 
+void CPU::SetVector(const QVector<Instruction> & inst){
+    this->IMem = inst;
+}
+
 void CPU:: Fetch(){
     if (Farray[0])
         CU.Step(IMem[CU.getPC()]);
@@ -58,7 +62,7 @@ void CPU::Execute(){
 void CPU::Mem(){
     if (Farray[3])
     {CU.setMemRData0(mem[CU.getMemAddr0()]);
-    if (CU.getMemWR()) mem[CU.getMemAddr0()]= CU.getMemWData0();}
+    if (CU.getMemRW()) mem[CU.getMemAddr0()]= CU.getMemWData0();}
 }
 
 void CPU::WriteBack(){

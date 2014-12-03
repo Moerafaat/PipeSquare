@@ -34,10 +34,10 @@ unsigned int ControlUnit::getPC(){
 }
 
 int ControlUnit::getRead0(){
-    return b1.rs;
+    return b1.rs;// This should probably be RegFile[b1.rs]
 }
 int ControlUnit::getRead1(){
-    return b1.rt;
+    return b1.rt;// This should probably be RegFile[b1.rt]
 }
 void ControlUnit::setData0(int val){
     if(b4.WE && b4.WAddr0 == b1.rs) val = b4.WData0;    //Forwarding from the output of the Memory Read
@@ -49,7 +49,7 @@ void ControlUnit::setData1(int val){
     if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rs) val = b3.WData0;  //Forwarding from ALU output
     
     if(isIMMasOp1(b1.Mnemonic)) b2.WData0 = val;
-    else b2.Op0 = val;
+    else b2.Op1 = val;
 }
 
 int ControlUnit::getOp0(){
@@ -66,7 +66,7 @@ void ControlUnit::setALUres(int val){
     else b3.WData0 = val;
 }
 
-bool ControlUnit::getMemWR(){
+bool ControlUnit::getMemRW(){
     return b3.MemRW;
 }
 int ControlUnit::getMemAddr0(){
