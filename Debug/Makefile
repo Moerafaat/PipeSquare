@@ -158,6 +158,7 @@ Makefile: ../PipeSquare.pro ../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/wi
 		../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/features/resolve_config.prf \
 		../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/features/exclusive_builds_post.prf \
 		../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/features/default_post.prf \
+		../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/features/c++11.prf \
 		../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/features/win32/rtti.prf \
 		../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/features/precompile_header.prf \
 		../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/features/warn_on.prf \
@@ -277,6 +278,7 @@ Makefile: ../PipeSquare.pro ../../../Programs/Qt5.3.2/5.3/mingw482_32/mkspecs/wi
 ..\..\..\Programs\Qt5.3.2\5.3\mingw482_32\mkspecs\features\resolve_config.prf:
 ..\..\..\Programs\Qt5.3.2\5.3\mingw482_32\mkspecs\features\exclusive_builds_post.prf:
 ..\..\..\Programs\Qt5.3.2\5.3\mingw482_32\mkspecs\features\default_post.prf:
+..\..\..\Programs\Qt5.3.2\5.3\mingw482_32\mkspecs\features\c++11.prf:
 ..\..\..\Programs\Qt5.3.2\5.3\mingw482_32\mkspecs\features\win32\rtti.prf:
 ..\..\..\Programs\Qt5.3.2\5.3\mingw482_32\mkspecs\features\precompile_header.prf:
 ..\..\..\Programs\Qt5.3.2\5.3\mingw482_32\mkspecs\features\warn_on.prf:
