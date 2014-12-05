@@ -91,7 +91,7 @@ void MainWindow::on_actionOpen_triggered(){
         file.close();
 
         message = "-File at path: " + path + " has been successfully opened.";
-        ui->textedit_log->setTextColor(QColor::fromRgb(0,102,0));
+        ui->textedit_log->setTextColor(QColor::fromRgb(0,0,102));
         ui->textedit_log->append(message);
     }
 }
@@ -99,12 +99,41 @@ void MainWindow::on_actionOpen_triggered(){
 void MainWindow::on_actionCompile_triggered(){
     try{
         instructions = parser.parse(file);
-    }catch(...){
-        QString message = "-File has failed to compile";
+    }catch(QString error){
+        QString message = "-File has failed to compile\n" + error;
         ui->textedit_log->setTextColor(QColor::fromRgb(204,0,0));
         ui->textedit_log->append(message);
         return;
     };
+
+    file.close();
+    ui->textedit_editor->clear();
+    QString comma = ", ";
+    for(int i=0; i<instructions.size(); i++){
+        QString row = instructions[i].RawInst.simplified();
+        QStringList elements = row.split(" ");
+        ui->textedit_editor->moveCursor (QTextCursor::End);
+        ui->textedit_editor->insertHtml("<span style='color:red'>" + elements[0] + ' ' + "</span>");
+        ui->textedit_editor->moveCursor (QTextCursor::End);
+        row = "";
+        for(int i=1; i<elements.size(); i++){
+            row = row + elements[i];
+            if(i != elements.size()-1) row += ",";
+        }
+        elements = row.split(",", QString::SkipEmptyParts);
+        for(int j=0; j<elements.size(); j++){
+            ui->textedit_editor->moveCursor (QTextCursor::End);
+            ui->textedit_editor->insertHtml("<span style='color:black'>" + elements[j] + "</span>");
+            ui->textedit_editor->moveCursor (QTextCursor::End);
+            if(j == elements.size()-1){
+                ui->textedit_editor->append("");
+                break;
+            }
+            ui->textedit_editor->moveCursor (QTextCursor::End);
+            ui->textedit_editor->insertHtml("<span style='color:red'>" + comma + "</span>");
+            ui->textedit_editor->moveCursor (QTextCursor::End);
+        }
+    }
 
     QString message = "-File has been successfully compiled";
     ui->textedit_log->setTextColor(QColor::fromRgb(0,102,0));

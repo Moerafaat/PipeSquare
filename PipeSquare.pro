@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 QT       += core gui
-CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,3 +33,5 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     resources.qrc
+
+CONFIG += c++11

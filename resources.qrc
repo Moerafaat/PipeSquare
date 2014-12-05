@@ -8,4 +8,7 @@
     <qresource prefix="/qss">
         <file>styles.qss</file>
     </qresource>
+    <qresource prefix="/files">
+        <file>TestProgram.txt</file>
+    </qresource>
 </RCC>
