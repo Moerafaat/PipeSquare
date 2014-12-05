@@ -5,15 +5,15 @@ bool ControlUnit::isIMMasOp1(const InstType v){
     return v == ADDI || v == LW || v == SW || v == SUBI;
 }
 
-ControlUnit::ControlUnit() : PC(0){
+ControlUnit::ControlUnit() : PC(0), BranchStall(0){
 }
 
-void ControlUnit::Step(const Instruction &inst){
-    if(InstQ.size() == 5) InstQ.dequeue();
+int ControlUnit::Step(const Instruction &inst){
+    if(!b4.IsIdle) InstQ.dequeue();
+    int t = BranchStall;
+    BranchStall = 0;
+    if(t) return t;
     InstQ.enqueue(inst);
-    
-    //Propagate();
-    //Decode();
     
     b1.Mnemonic = inst.Mnemonic;
     b1.rs = inst.rs;
@@ -23,6 +23,7 @@ void ControlUnit::Step(const Instruction &inst){
     b1.jaddr = inst.jaddr;
     
     PC++;
+    return 0;
 }
 
 unsigned int ControlUnit::nInstructions(){
@@ -33,22 +34,27 @@ unsigned int ControlUnit::getPC(){
     return PC;
 }
 
-int ControlUnit::getRead0(){
-    return b1.rs;// This should probably be RegFile[b1.rs]
+int ControlUnit::getRAddr0(){
+    return b1.rs;
 }
-int ControlUnit::getRead1(){
-    return b1.rt;// This should probably be RegFile[b1.rt]
+int ControlUnit::getRAddr1(){
+    return b1.rt;
 }
 void ControlUnit::setData0(int val){
+    if(BranchStall&1) return;
     if(b4.WE && b4.WAddr0 == b1.rs) val = b4.WData0;    //Forwarding from the output of the Memory Read
     if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rs) val = b3.WData0;  //Forwarding from ALU output
+    else if(b2.WE && b2.ALU_MEM && b3.MemAddr0 == b1.rs) {BranchStall|=1; return;}
+
     b2.Op0 = val;
 }
 void ControlUnit::setData1(int val){
+    if(BranchStall&1) return;
     if(b4.WE && b4.WAddr0 == b1.rs) val = b4.WData0;    //Forwarding from the output of the Memory Read
     if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rs) val = b3.WData0;  //Forwarding from ALU output
-    
-    if(isIMMasOp1(b1.Mnemonic)) b2.WData0 = val;
+    else if(b2.WE && b2.ALU_MEM && b3.MemAddr0 == b1.rs) {BranchStall|=1; return;}
+
+    if(isIMMasOp1(b1.Mnemonic)) b2.Data0 = val;
     else b2.Op1 = val;
 }
 
@@ -62,8 +68,17 @@ int ControlUnit::getALUOp(){
     return b2.ALUop;
 }
 void ControlUnit::setALUres(int val){
-    if(b2.IsDMemAddr) b3.MemAddr0 = val;
-    else b3.WData0 = val;
+    switch(b2.IsComparator){
+    case 1: //BEQ
+        if(val == 0) {PC += b2.Data0; BranchStall |= 2;}
+        break;
+    case 2: //BLE
+        if(val <= 0) {PC += b2.Data0; BranchStall |= 2; }
+        break;
+    default:
+        if(b2.IsDMemAddr) b3.MemAddr0 = val;
+        else b3.WData0 = val;
+    }
 }
 
 bool ControlUnit::getMemRW(){
