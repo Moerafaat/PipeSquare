@@ -10,7 +10,8 @@ public:
     Memory();
     Memory(const Memory&);
     Memory& operator=(const Memory&);
-    int& operator[](unsigned int);
+    int operator[](unsigned int)const;
+    int &operator[](unsigned int);
 };
 
 #endif // MEMORY_H
