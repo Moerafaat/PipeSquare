@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFile>
+#include <QVector>
+#include <QTableWidget>
 #include "parser.h"
 #include "cpu.h"
-#include <QFile>
 
 namespace Ui{
 class MainWindow;
@@ -23,12 +25,14 @@ private slots:
     void on_actionStep_triggered();
 
 private:
+    void InitializeBuffer(QTableWidget*,QVector<QString>);
+    void SetBuffer(QTableWidget*, QVector<QString>);
     Ui::MainWindow *ui;
     Parser parser;
     CPU cpu;
     QFile file;
     QVector<Instruction> instructions;
-
+    QVector<QString> regfile, memory, IF_ID, ID_EX, EX_MEM, MEM_WB;
 };
 
 #endif // MAINWINDOW_H

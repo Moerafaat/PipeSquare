@@ -26,7 +26,7 @@
       <x>0</x>
       <y>0</y>
       <width>211</width>
-      <height>451</height>
+      <height>421</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -52,9 +52,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>470</y>
+      <y>440</y>
       <width>711</width>
-      <height>141</height>
+      <height>171</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -72,7 +72,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPlainTextEdit" name="plaintextedit_log"/>
+      <widget class="QTextEdit" name="textedit_log"/>
      </item>
     </layout>
    </widget>
@@ -80,7 +80,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>450</y>
+      <y>420</y>
       <width>991</width>
       <height>20</height>
      </rect>
@@ -108,7 +108,7 @@
       <x>210</x>
       <y>0</y>
       <width>501</width>
-      <height>451</height>
+      <height>421</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -137,13 +137,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>730</x>
       <y>0</y>
       <width>281</width>
-      <height>451</height>
+      <height>421</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -196,9 +196,9 @@
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>470</y>
+      <y>440</y>
       <width>281</width>
-      <height>141</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -208,13 +208,13 @@
      <attribute name="title">
       <string>IF/ID</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget_3">
+     <widget class="QTableWidget" name="tablewidget_IFID">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>121</height>
+        <height>161</height>
        </rect>
       </property>
      </widget>
@@ -223,13 +223,13 @@
      <attribute name="title">
       <string>ID/EX</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget_4">
+     <widget class="QTableWidget" name="tablewidget_IDEX">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>131</height>
+        <height>161</height>
        </rect>
       </property>
      </widget>
@@ -238,13 +238,13 @@
      <attribute name="title">
       <string>EX/MEM</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget_5">
+     <widget class="QTableWidget" name="tablewidget_EXMEM">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>131</height>
+        <height>161</height>
        </rect>
       </property>
      </widget>
@@ -253,13 +253,13 @@
      <attribute name="title">
       <string>MEM/WB</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget_6">
+     <widget class="QTableWidget" name="tablewidget_MEMWB">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>281</width>
-        <height>131</height>
+        <height>161</height>
        </rect>
       </property>
      </widget>
@@ -269,8 +269,6 @@
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder>tabWidget</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
    <zorder>tabWidget</zorder>
