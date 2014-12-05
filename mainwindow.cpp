@@ -12,9 +12,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     QIcon icon(":/images/logo.png");
     QWidget::setWindowIcon(icon);
+    QFont font("Helvetica", 10);
 
-    ui->textedit_editor->setReadOnly(true);
     ui->textedit_log->setReadOnly(true);
+    ui->textedit_editor->setReadOnly(true);
+    ui->textedit_editor->setTabStopWidth(30);
+    ui->textedit_editor->setFont(font);
 
     ui->tablewidget_regfile->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tablewidget_regfile->setColumnCount(1);
@@ -108,12 +111,13 @@ void MainWindow::on_actionCompile_triggered(){
 
     file.close();
     ui->textedit_editor->clear();
-    QString comma = ", ";
+    QString comma = ",  ";
     for(int i=0; i<instructions.size(); i++){
         QString row = instructions[i].RawInst.simplified();
         QStringList elements = row.split(" ");
         ui->textedit_editor->moveCursor (QTextCursor::End);
-        ui->textedit_editor->insertHtml("<span style='color:red'>" + elements[0] + ' ' + "</span>");
+        ui->textedit_editor->insertHtml("<span style='color:red'>" + elements[0] + "</span>");
+        ui->textedit_editor->insertPlainText("\t");
         ui->textedit_editor->moveCursor (QTextCursor::End);
         row = "";
         for(int i=1; i<elements.size(); i++){
