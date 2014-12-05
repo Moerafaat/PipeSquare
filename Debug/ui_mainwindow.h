@@ -14,15 +14,14 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableView>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
@@ -38,15 +37,6 @@ public:
     QAction *actionStep;
     QAction *actionCompile;
     QWidget *centralWidget;
-    QTabWidget *tabWidget;
-    QWidget *IF_ID;
-    QTableWidget *tableWidget_3;
-    QWidget *ID_EX;
-    QTableWidget *tableWidget_4;
-    QWidget *EX_MEM;
-    QTableWidget *tableWidget_5;
-    QWidget *MEM_WB;
-    QTableWidget *tableWidget_6;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label_editor;
@@ -54,21 +44,30 @@ public:
     QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_4;
-    QPlainTextEdit *plaintextedit_log;
+    QTextEdit *textedit_log;
+    QFrame *line;
+    QFrame *line_2;
     QWidget *layoutWidget2;
-    QVBoxLayout *verticalLayout_4;
-    QLabel *label_memory;
-    QTableWidget *tablewidget_memory;
+    QVBoxLayout *verticalLayout_5;
+    QLabel *label_pipeline;
+    QTableWidget *tablewidget_pipeline;
     QWidget *layoutWidget3;
+    QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_regfile;
     QTableWidget *tablewidget_regfile;
-    QFrame *line;
-    QFrame *line_2;
-    QWidget *widget;
-    QVBoxLayout *verticalLayout_5;
-    QLabel *label_pipeline;
-    QTableView *tableView;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label_memory;
+    QTableWidget *tablewidget_memory;
+    QTabWidget *tabWidget;
+    QWidget *IF_ID;
+    QTableWidget *tablewidget_IFID;
+    QWidget *ID_EX;
+    QTableWidget *tablewidget_IDEX;
+    QWidget *EX_MEM;
+    QTableWidget *tablewidget_EXMEM;
+    QWidget *MEM_WB;
+    QTableWidget *tablewidget_MEMWB;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -78,7 +77,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1010, 687);
+        MainWindow->resize(1010, 686);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setStyleSheet(QStringLiteral(""));
         actionOpen = new QAction(MainWindow);
@@ -98,36 +97,9 @@ public:
         actionCompile->setIcon(icon2);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        tabWidget = new QTabWidget(centralWidget);
-        tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(730, 470, 281, 141));
-        IF_ID = new QWidget();
-        IF_ID->setObjectName(QStringLiteral("IF_ID"));
-        tableWidget_3 = new QTableWidget(IF_ID);
-        tableWidget_3->setObjectName(QStringLiteral("tableWidget_3"));
-        tableWidget_3->setGeometry(QRect(0, 0, 281, 121));
-        tabWidget->addTab(IF_ID, QString());
-        ID_EX = new QWidget();
-        ID_EX->setObjectName(QStringLiteral("ID_EX"));
-        tableWidget_4 = new QTableWidget(ID_EX);
-        tableWidget_4->setObjectName(QStringLiteral("tableWidget_4"));
-        tableWidget_4->setGeometry(QRect(0, 0, 281, 131));
-        tabWidget->addTab(ID_EX, QString());
-        EX_MEM = new QWidget();
-        EX_MEM->setObjectName(QStringLiteral("EX_MEM"));
-        tableWidget_5 = new QTableWidget(EX_MEM);
-        tableWidget_5->setObjectName(QStringLiteral("tableWidget_5"));
-        tableWidget_5->setGeometry(QRect(0, 0, 281, 131));
-        tabWidget->addTab(EX_MEM, QString());
-        MEM_WB = new QWidget();
-        MEM_WB->setObjectName(QStringLiteral("MEM_WB"));
-        tableWidget_6 = new QTableWidget(MEM_WB);
-        tableWidget_6->setObjectName(QStringLiteral("tableWidget_6"));
-        tableWidget_6->setGeometry(QRect(0, 0, 281, 131));
-        tabWidget->addTab(MEM_WB, QString());
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 0, 261, 451));
+        layoutWidget->setGeometry(QRect(0, 0, 211, 421));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -146,7 +118,7 @@ public:
 
         layoutWidget1 = new QWidget(centralWidget);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(0, 470, 711, 141));
+        layoutWidget1->setGeometry(QRect(0, 440, 711, 171));
         verticalLayout_2 = new QVBoxLayout(layoutWidget1);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -158,38 +130,52 @@ public:
 
         verticalLayout_2->addWidget(label_4);
 
-        plaintextedit_log = new QPlainTextEdit(layoutWidget1);
-        plaintextedit_log->setObjectName(QStringLiteral("plaintextedit_log"));
+        textedit_log = new QTextEdit(layoutWidget1);
+        textedit_log->setObjectName(QStringLiteral("textedit_log"));
 
-        verticalLayout_2->addWidget(plaintextedit_log);
+        verticalLayout_2->addWidget(textedit_log);
 
+        line = new QFrame(centralWidget);
+        line->setObjectName(QStringLiteral("line"));
+        line->setGeometry(QRect(10, 420, 991, 20));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+        line_2 = new QFrame(centralWidget);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setGeometry(QRect(710, 10, 20, 591));
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
         layoutWidget2 = new QWidget(centralWidget);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(870, 0, 141, 451));
-        verticalLayout_4 = new QVBoxLayout(layoutWidget2);
-        verticalLayout_4->setSpacing(0);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_memory = new QLabel(layoutWidget2);
-        label_memory->setObjectName(QStringLiteral("label_memory"));
-        label_memory->setMargin(5);
+        layoutWidget2->setGeometry(QRect(210, 0, 501, 421));
+        verticalLayout_5 = new QVBoxLayout(layoutWidget2);
+        verticalLayout_5->setSpacing(0);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        label_pipeline = new QLabel(layoutWidget2);
+        label_pipeline->setObjectName(QStringLiteral("label_pipeline"));
+        label_pipeline->setMargin(5);
 
-        verticalLayout_4->addWidget(label_memory);
+        verticalLayout_5->addWidget(label_pipeline);
 
-        tablewidget_memory = new QTableWidget(layoutWidget2);
-        tablewidget_memory->setObjectName(QStringLiteral("tablewidget_memory"));
+        tablewidget_pipeline = new QTableWidget(layoutWidget2);
+        tablewidget_pipeline->setObjectName(QStringLiteral("tablewidget_pipeline"));
+        tablewidget_pipeline->setMinimumSize(QSize(0, 0));
 
-        verticalLayout_4->addWidget(tablewidget_memory);
+        verticalLayout_5->addWidget(tablewidget_pipeline);
 
         layoutWidget3 = new QWidget(centralWidget);
         layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(730, 0, 141, 451));
-        verticalLayout_3 = new QVBoxLayout(layoutWidget3);
+        layoutWidget3->setGeometry(QRect(730, 0, 281, 421));
+        horizontalLayout = new QHBoxLayout(layoutWidget3);
+        horizontalLayout->setSpacing(0);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(0);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         label_regfile = new QLabel(layoutWidget3);
         label_regfile->setObjectName(QStringLiteral("label_regfile"));
         label_regfile->setMargin(5);
@@ -201,46 +187,61 @@ public:
 
         verticalLayout_3->addWidget(tablewidget_regfile);
 
-        line = new QFrame(centralWidget);
-        line->setObjectName(QStringLiteral("line"));
-        line->setGeometry(QRect(10, 450, 991, 20));
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
-        line_2 = new QFrame(centralWidget);
-        line_2->setObjectName(QStringLiteral("line_2"));
-        line_2->setGeometry(QRect(710, 10, 20, 591));
-        line_2->setFrameShape(QFrame::VLine);
-        line_2->setFrameShadow(QFrame::Sunken);
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(260, 0, 451, 451));
-        verticalLayout_5 = new QVBoxLayout(widget);
-        verticalLayout_5->setSpacing(0);
-        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
-        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
-        label_pipeline = new QLabel(widget);
-        label_pipeline->setObjectName(QStringLiteral("label_pipeline"));
-        label_pipeline->setMargin(5);
 
-        verticalLayout_5->addWidget(label_pipeline);
+        horizontalLayout->addLayout(verticalLayout_3);
 
-        tableView = new QTableView(widget);
-        tableView->setObjectName(QStringLiteral("tableView"));
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(0);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        label_memory = new QLabel(layoutWidget3);
+        label_memory->setObjectName(QStringLiteral("label_memory"));
+        label_memory->setMargin(5);
 
-        verticalLayout_5->addWidget(tableView);
+        verticalLayout_4->addWidget(label_memory);
 
+        tablewidget_memory = new QTableWidget(layoutWidget3);
+        tablewidget_memory->setObjectName(QStringLiteral("tablewidget_memory"));
+
+        verticalLayout_4->addWidget(tablewidget_memory);
+
+
+        horizontalLayout->addLayout(verticalLayout_4);
+
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setGeometry(QRect(730, 440, 281, 171));
+        IF_ID = new QWidget();
+        IF_ID->setObjectName(QStringLiteral("IF_ID"));
+        tablewidget_IFID = new QTableWidget(IF_ID);
+        tablewidget_IFID->setObjectName(QStringLiteral("tablewidget_IFID"));
+        tablewidget_IFID->setGeometry(QRect(0, 0, 281, 161));
+        tabWidget->addTab(IF_ID, QString());
+        ID_EX = new QWidget();
+        ID_EX->setObjectName(QStringLiteral("ID_EX"));
+        tablewidget_IDEX = new QTableWidget(ID_EX);
+        tablewidget_IDEX->setObjectName(QStringLiteral("tablewidget_IDEX"));
+        tablewidget_IDEX->setGeometry(QRect(0, 0, 281, 161));
+        tabWidget->addTab(ID_EX, QString());
+        EX_MEM = new QWidget();
+        EX_MEM->setObjectName(QStringLiteral("EX_MEM"));
+        tablewidget_EXMEM = new QTableWidget(EX_MEM);
+        tablewidget_EXMEM->setObjectName(QStringLiteral("tablewidget_EXMEM"));
+        tablewidget_EXMEM->setGeometry(QRect(0, 0, 281, 161));
+        tabWidget->addTab(EX_MEM, QString());
+        MEM_WB = new QWidget();
+        MEM_WB->setObjectName(QStringLiteral("MEM_WB"));
+        tablewidget_MEMWB = new QTableWidget(MEM_WB);
+        tablewidget_MEMWB->setObjectName(QStringLiteral("tablewidget_MEMWB"));
+        tablewidget_MEMWB->setGeometry(QRect(0, 0, 281, 161));
+        tabWidget->addTab(MEM_WB, QString());
         MainWindow->setCentralWidget(centralWidget);
         layoutWidget->raise();
         layoutWidget->raise();
         layoutWidget->raise();
         layoutWidget->raise();
-        tabWidget->raise();
-        tableView->raise();
-        label_pipeline->raise();
         line->raise();
         line_2->raise();
-        tablewidget_regfile->raise();
+        tabWidget->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1010, 21));
@@ -280,15 +281,15 @@ public:
         actionOpen->setText(QApplication::translate("MainWindow", "Open", 0));
         actionStep->setText(QApplication::translate("MainWindow", "Step", 0));
         actionCompile->setText(QApplication::translate("MainWindow", "Compile", 0));
+        label_editor->setText(QApplication::translate("MainWindow", "Editor", 0));
+        label_4->setText(QApplication::translate("MainWindow", "Log", 0));
+        label_pipeline->setText(QApplication::translate("MainWindow", "Pipeline Diagram", 0));
+        label_regfile->setText(QApplication::translate("MainWindow", "Register File", 0));
+        label_memory->setText(QApplication::translate("MainWindow", "Memory", 0));
         tabWidget->setTabText(tabWidget->indexOf(IF_ID), QApplication::translate("MainWindow", "IF/ID", 0));
         tabWidget->setTabText(tabWidget->indexOf(ID_EX), QApplication::translate("MainWindow", "ID/EX", 0));
         tabWidget->setTabText(tabWidget->indexOf(EX_MEM), QApplication::translate("MainWindow", "EX/MEM", 0));
         tabWidget->setTabText(tabWidget->indexOf(MEM_WB), QApplication::translate("MainWindow", "MEM/WB", 0));
-        label_editor->setText(QApplication::translate("MainWindow", "Editor", 0));
-        label_4->setText(QApplication::translate("MainWindow", "Log", 0));
-        label_memory->setText(QApplication::translate("MainWindow", "Memory", 0));
-        label_regfile->setText(QApplication::translate("MainWindow", "Register File", 0));
-        label_pipeline->setText(QApplication::translate("MainWindow", "Pipeline Diagram", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 
