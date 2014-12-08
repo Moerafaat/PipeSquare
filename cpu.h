@@ -13,22 +13,21 @@ class CPU{
     RegisterFile RegFile;
     QVector<Instruction> IMem;
     ControlUnit CU;
-    bool Farray[5];
-
+    int nCycles;
+    int nStages;
+    void Fetch();
+    void Read();
+    void Execute();
+    void Mem();
+    void WriteBack();
 public:
     CPU();
     CPU(const CPU&);
     CPU& operator=(const CPU&);
 
     void SetVector(const QVector<Instruction>&);
-    void Fetch();
-    void Read();
-    void Execute();
-    void Mem();
-    void WriteBack();
-    void Branch();
 
-    bool Step();    //Takes elements from GUI to update
+    int Step();    //Returns Branch\Stall mask
     bool EOI();     //End of Instructions
 };
 

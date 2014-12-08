@@ -7,18 +7,14 @@ RegisterFile::RegisterFile(){
 
 RegisterFile::RegisterFile(const RegisterFile & t){
     for (int i=0; i<RegisterCount; i++)
-        this->reg[i]=t[i];
+        this->reg[i]=t.reg[i];
 }
 
 RegisterFile &RegisterFile::operator=(const RegisterFile & t){
     for (int i=0; i<RegisterCount; i++)
-        this->reg[i]=t[i];
+        this->reg[i]=t.reg[i];
     return *this;
 
-}
-
-int RegisterFile::operator[](unsigned int x) const{
-    return reg[x];
 }
 
 int &RegisterFile::operator[](unsigned int x){

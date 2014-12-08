@@ -124,6 +124,7 @@ release/qrc_resources.cpp: ../resources.qrc \
 		../compile.png \
 		../open.png \
 		../logo.png \
+		../TestProgram.txt \
 		../styles.qss
 	D:\Programs\Qt5.3.2\5.3\mingw482_32\bin\rcc.exe -name resources ..\resources.qrc -o release\qrc_resources.cpp
 
@@ -256,9 +257,9 @@ release/moc_mainwindow.cpp: ../../../../Programs/Qt5.3.2/5.3/mingw482_32/include
 		../parser.h \
 		../instruction.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QString \
+		../registerfile.h \
 		../cpu.h \
 		../memory.h \
-		../registerfile.h \
 		../controlunit.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QQueue \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qqueue.h \
@@ -412,9 +413,9 @@ release/main.o: ../main.cpp ../mainwindow.h \
 		../parser.h \
 		../instruction.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QString \
+		../registerfile.h \
 		../cpu.h \
 		../memory.h \
-		../registerfile.h \
 		../controlunit.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QQueue \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qqueue.h \
@@ -555,9 +556,9 @@ release/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../parser.h \
 		../instruction.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QString \
+		../registerfile.h \
 		../cpu.h \
 		../memory.h \
-		../registerfile.h \
 		../controlunit.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QQueue \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qqueue.h \
@@ -576,6 +577,11 @@ release/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QButtonGroup \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qbuttongroup.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QFrame \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QHBoxLayout \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qlayout.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QHeaderView \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qheaderview.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QLabel \
@@ -584,31 +590,19 @@ release/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qmenu.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QMenuBar \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qmenubar.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QPlainTextEdit \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qplaintextedit.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QStatusBar \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qstatusbar.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QTabWidget \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QTextEdit \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qtextedit.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qtextdocument.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qtextoption.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qtextcursor.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qtextformat.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qpen.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qabstracttextdocumentlayout.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qtextlayout.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qglyphrun.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qrawfont.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtGui/qfontdatabase.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QStatusBar \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qstatusbar.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QTabWidget \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QTableView \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QTextEdit \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QToolBar \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qtoolbar.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QVBoxLayout \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qlayout.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QWidget \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/QFileDialog \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtWidgets/qfiledialog.h \
@@ -715,10 +709,8 @@ release/instruction.o: ../instruction.cpp ../instruction.h \
 release/memory.o: ../memory.cpp ../memory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\memory.o ..\memory.cpp
 
-release/parser.o: ../parser.cpp ../parser.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QVector \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qvector.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qalgorithms.h \
+release/parser.o: ../parser.cpp ../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QRegExp \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qregexp.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qglobal.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qconfig.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qfeatures.h \
@@ -747,23 +739,22 @@ release/parser.o: ../parser.cpp ../parser.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qglobalstatic.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qmutex.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qnumeric.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qiterator.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qlist.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qstring.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qchar.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qbytearray.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qrefcount.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qarraydata.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qpoint.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qnamespace.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QFile \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qfile.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qfiledevice.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qarraydata.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qstringbuilder.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QTextStream \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qtextstream.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qiodevice.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qobject.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qobjectdefs.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qobjectdefs_impl.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qstring.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qchar.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qbytearray.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qstringbuilder.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qlist.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qalgorithms.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qiterator.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qcoreevent.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qscopedpointer.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qmetatype.h \
@@ -771,8 +762,29 @@ release/parser.o: ../parser.cpp ../parser.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qcontainerfwd.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qisenum.h \
 		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qobject_impl.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qlocale.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qvariant.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qmap.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qpair.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qdebug.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qhash.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qvector.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qpoint.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qset.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qcontiguouscache.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qstringlist.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qdatastream.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qstringmatcher.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qshareddata.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QMap \
+		../parser.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QVector \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QFile \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qfile.h \
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/qfiledevice.h \
 		../instruction.h \
-		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QString
+		../../../../Programs/Qt5.3.2/5.3/mingw482_32/include/QtCore/QString \
+		../registerfile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\parser.o ..\parser.cpp
 
 release/registerfile.o: ../registerfile.cpp ../registerfile.h
