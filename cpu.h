@@ -13,6 +13,7 @@ class CPU{
     RegisterFile RegFile;
     QVector<Instruction> IMem;
     ControlUnit CU;
+    int BranchStallFlag;
     int nCycles;
     int nStages;
     void Fetch();

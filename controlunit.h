@@ -51,7 +51,7 @@ class ControlUnit{
     bool isIMMasOp1(const InstType); //(is immediate as Op1) returns whether instruction is I format
 public:
     ControlUnit();
-
+    int PopBranchStallFlag();
     int Step(const Instruction&);
     unsigned int nInstructions();
     unsigned int getPC();

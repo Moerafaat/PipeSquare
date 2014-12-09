@@ -1,7 +1,7 @@
 #include "cpu.h"
 #include<QtAlgorithms>
 
-CPU::CPU() : nCycles(0), nStages(5){
+CPU::CPU() : nCycles(0), nStages(5), BranchStallFlag(0){
 }
 CPU::CPU(const CPU &temp){
     this->mem=temp.mem;
@@ -25,10 +25,13 @@ void CPU::SetVector(const QVector<Instruction> & inst){
 
 void CPU::Fetch(){
     if(CU.getPC() >= IMem.size() && nStages < 5) return;
+    if(CU.getPC() >= IMem.size() || CU.getPC() < 0) throw(QString("PC out of bound"));
     CU.Step(IMem[CU.getPC()]);
 }
 void CPU::Read(){
     if(CU.getPC() >= IMem.size() && nStages < 4) return;
+    if(CU.getRAddr0() < 0 || CU.getRAddr0() >= RegFile.RegisterCount) throw(QString("Register address out of bound"));
+    if(CU.getRAddr1() < 0 || CU.getRAddr1() >= RegFile.RegisterCount) throw(QString("Register address out of bound"));
     CU.setData0(RegFile[CU.getRAddr0()]);
     CU.setData1(RegFile[CU.getRAddr1()]);
     CU.Propagate12();
@@ -61,14 +64,15 @@ void CPU::Execute(){
 }
 void CPU::Mem(){
     if(CU.getPC() >= IMem.size() && nStages < 2) return;
-    if(CU.getMemAddr0() >= 0 && CU.getMemAddr0() < mem.WordCount){
-        CU.setMemRData0(mem[CU.getMemAddr0()]);
-        if (CU.getMemRW()) mem[CU.getMemAddr0()]= CU.getMemWData0();
-    }
+    if(CU.getMemAddr0() < 0 || CU.getMemAddr0() >= mem.WordCount) throw(QString("Memory Index out of bound"));
+    CU.setMemRData0(mem[CU.getMemAddr0()]);
+    if (CU.getMemRW()) mem[CU.getMemAddr0()]= CU.getMemWData0();
+
     CU.Propagate34();
 }
 void CPU::WriteBack(){
     if(CU.getPC() >= IMem.size() && nStages < 1) return;
+    if(CU.getWAddr0() < 0 || CU.getWAddr0() >= RegFile.RegisterCount) throw(QString("Register address out of bound"));
     if (CU.getWE()) RegFile[CU.getWAddr0()] = CU.getWData0();
 }
 
@@ -81,12 +85,9 @@ int CPU::Step(){
     case 2:     Read();
     case 1:     Fetch();
     }
-    //Fetch();
-    //Read();
-    //Execute();
-    //Mem();
-    //WriteBack();
-    if(CU.getPC() >= IMem.size()) nStages--;    //Need to check the correctness;
+    BranchStallFlag = 0;
+    BranchStallFlag = CU.PopBranchStallFlag();
+    if(CU.getPC() >= IMem.size() && ~BranchStallFlag&1) nStages--;    //Need to check the correctness;
     return nStages;
 }
 
