@@ -143,8 +143,8 @@ void MainWindow::on_actionCompile_triggered(){
     ui->textedit_log->setTextColor(QColor::fromRgb(0,102,0));
     ui->textedit_log->append(message);
 
-    cpu.SetVector(instructions);
-    fun();
+    //cpu.SetVector(instructions);
+    //fun();
 }
 
 void MainWindow::on_actionStep_triggered(){

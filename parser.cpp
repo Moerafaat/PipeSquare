@@ -21,8 +21,9 @@ QVector<Instruction> Parser::parse(QFile& file){
     QRegExp ops_3("\\s*(ADD|XOR|SLT|OR|ADDI|SUBI|BEQ|BLE)\\s+\\$(\\d+)\\s*,\\s*\\$(\\d+)\\s*,\\s*(\\$?\\d+)\\s*");
     QRegExp ops_2("\\s*(LW|SW)\\s+\\$(\\d+)\\s*,\\s*(\\d+)\\s*\\(\\s*\\$(\\d+)\\s*\\)\\s*");
     QRegExp ops_1("\\s*(J|JAL|JR)\\s+(\\$?\\d+)\\s*");
+    QString error = "Error: Specify the file to be compiled first";
 
-    if(!file.open(QFile::ReadOnly)) throw("Error: Specify the file to be compiled first");
+    if(!file.open(QFile::ReadOnly)) throw(error);
     QTextStream stream(&file);
     QString row;
     unsigned int counter=1;
@@ -33,9 +34,9 @@ QVector<Instruction> Parser::parse(QFile& file){
             current.Mnemonic = mnem[ops_3.cap(1)];
             if(current.Mnemonic == ADD || current.Mnemonic == XOR || current.Mnemonic == SLT || current.Mnemonic == OR){
                 if(ops_3.cap(4).at(0) != '$') throw("Error: Problem at instruction " + QString::number(counter));
-                current.rs = atoi(ops_3.cap(3).toStdString().substr(1).c_str());
+                current.rs = atoi(ops_3.cap(3).toStdString().c_str());
                 current.rt = atoi(ops_3.cap(4).toStdString().substr(1).c_str());
-                current.rd = atoi(ops_3.cap(2).toStdString().substr(1).c_str());
+                current.rd = atoi(ops_3.cap(2).toStdString().c_str());
                 current.imm = 0;
                 current.jaddr = 0;
                 try{
@@ -44,9 +45,8 @@ QVector<Instruction> Parser::parse(QFile& file){
             }
             else{
                 if(ops_3.cap(4).at(0) == '$') throw("Error: Problem at instruction " + QString::number(counter));
-                current.rs = atoi(ops_3.cap(3).toStdString().substr(1).c_str());
-                qDebug() << ops_3.cap(3).toStdString().substr(1).c_str();
-                current.rt = atoi(ops_3.cap(2).toStdString().substr(1).c_str());
+                current.rs = atoi(ops_3.cap(3).toStdString().c_str());
+                current.rt = atoi(ops_3.cap(2).toStdString().c_str());
                 if(current.Mnemonic == BEQ || current.Mnemonic == BLE) swap(current.rs, current.rt);
                 current.rd = 0;
                 current.imm = atoi(ops_3.cap(4).toStdString().c_str());
@@ -59,8 +59,8 @@ QVector<Instruction> Parser::parse(QFile& file){
         else if(ops_2.indexIn(row) != -1){ //2 operand instructions
             current.RawInst = row;
             current.Mnemonic = mnem[ops_2.cap(1)];
-            current.rs = atoi(ops_2.cap(4).toStdString().substr(1).c_str());
-            current.rt = atoi(ops_2.cap(2).toStdString().substr(1).c_str());
+            current.rs = atoi(ops_2.cap(4).toStdString().c_str());
+            current.rt = atoi(ops_2.cap(2).toStdString().c_str());
             current.rd = 0;
             current.imm = atoi(ops_2.cap(3).toStdString().c_str());
             current.jaddr = 0;
