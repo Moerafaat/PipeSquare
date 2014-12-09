@@ -29,8 +29,8 @@ void CPU::Fetch(){
 }
 void CPU::Read(){
     if(CU.getPC() >= IMem.size() && nStages < 4) return;
-    CU.setData0(CU.getRAddr0());
-    CU.setData1(CU.getRAddr1());
+    CU.setData0(RegFile[CU.getRAddr0()]);
+    CU.setData1(RegFile[CU.getRAddr1()]);
     CU.Propagate12();
 }
 void CPU::Execute(){
@@ -55,14 +55,16 @@ void CPU::Execute(){
         if (tOp0<tOp1) CU.setALUres(1);
         else CU.setALUres(0);
         break;
-    default:    throw("Invalid ALUop");       
+    default:    throw("Invalid ALUop");
     }
     CU.Propagate23();
 }
 void CPU::Mem(){
     if(CU.getPC() >= IMem.size() && nStages < 2) return;
-    CU.setMemRData0(mem[CU.getMemAddr0()]);
-    if (CU.getMemRW()) mem[CU.getMemAddr0()]= CU.getMemWData0();
+    if(CU.getMemAddr0() >= 0 && CU.getMemAddr0() < mem.WordCount){
+        CU.setMemRData0(mem[CU.getMemAddr0()]);
+        if (CU.getMemRW()) mem[CU.getMemAddr0()]= CU.getMemWData0();
+    }
     CU.Propagate34();
 }
 void CPU::WriteBack(){

@@ -28,8 +28,10 @@ private:
     void InitializeBuffer(QTableWidget*,QVector<QString>);
     void SetBuffer(QTableWidget*, QVector<QString>);
     void fun(){
-        while(true)
-            cpu.Step();
+        for(int i = 0; i < 10000; i++)
+            if(i == 10)
+                cpu.Step();
+            else cpu.Step();
     }
 
     Ui::MainWindow *ui;
