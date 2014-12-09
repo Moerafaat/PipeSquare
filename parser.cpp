@@ -2,6 +2,7 @@
 #include <QRegExp>
 #include <QTextStream>
 #include <QMap>
+#include <QDebug>
 #include "parser.h"
 
 using namespace std;
@@ -44,6 +45,7 @@ QVector<Instruction> Parser::parse(QFile& file){
             else{
                 if(ops_3.cap(4).at(0) == '$') throw("Error: Problem at instruction " + QString::number(counter));
                 current.rs = atoi(ops_3.cap(3).toStdString().substr(1).c_str());
+                qDebug() << ops_3.cap(3).toStdString().substr(1).c_str();
                 current.rt = atoi(ops_3.cap(2).toStdString().substr(1).c_str());
                 if(current.Mnemonic == BEQ || current.Mnemonic == BLE) swap(current.rs, current.rt);
                 current.rd = 0;

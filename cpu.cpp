@@ -72,14 +72,19 @@ void CPU::WriteBack(){
 
 int CPU::Step(){
     nCycles++;
-    switch(nCycles){      //You will like this one! :D
+    /*switch(nCycles){      //You will like this one! :D
     default:    WriteBack();
     case 4:     Mem();
     case 3:     Execute();
     case 2:     Read();
     case 1:     Fetch();
-    }
-    if(CU.getPC() >= IMem.size()) nStages--;    //Need to check the correctness;
+    }*/
+    Fetch();
+    Read();
+    Execute();
+    Mem();
+    WriteBack();
+    //if(CU.getPC() >= IMem.size()) nStages--;    //Need to check the correctness;
     return nStages;
 }
 

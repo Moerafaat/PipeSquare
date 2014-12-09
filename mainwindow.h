@@ -27,6 +27,11 @@ private slots:
 private:
     void InitializeBuffer(QTableWidget*,QVector<QString>);
     void SetBuffer(QTableWidget*, QVector<QString>);
+    void fun(){
+        while(true)
+            cpu.Step();
+    }
+
     Ui::MainWindow *ui;
     Parser parser;
     CPU cpu;
