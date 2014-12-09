@@ -41,7 +41,8 @@ private:
     QVector<Instruction> instructions;
     QVector<int> regfile, memory;
     QVector<QString> IF_ID, ID_EX, EX_MEM, MEM_WB;
-    int pc;
+    int pc, cycles;
+    bool IsStall, IsBranch;
 };
 
 #endif // MAINWINDOW_H
