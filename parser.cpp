@@ -17,7 +17,7 @@ QVector<Instruction> Parser::parse(QFile& file){
     mnem.insert("LW", LW); mnem.insert("SW", SW);
     mnem.insert("J", J); mnem.insert("JAL", JAL); mnem.insert("JR", JR);
 
-    QRegExp whitespace("(\\s*)?");
+    QRegExp whitespace("^(\\s*)?$");
     QRegExp ops_3("\\s*(ADD|XOR|SLT|OR|ADDI|SUBI|BEQ|BLE)\\s+\\$(\\d+)\\s*,\\s*\\$(\\d+)\\s*,\\s*(\\$?\\d+)\\s*");
     QRegExp ops_2("\\s*(LW|SW)\\s+\\$(\\d+)\\s*,\\s*(\\d+)\\s*\\(\\s*\\$(\\d+)\\s*\\)\\s*");
     QRegExp ops_1("\\s*(J|JAL|JR)\\s+(\\$?\\d+)\\s*");
