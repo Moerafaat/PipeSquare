@@ -238,7 +238,8 @@ void MainWindow::on_actionStep_triggered(){
         ui->tablewidget_pipeline->setItem(ui->tablewidget_pipeline->rowCount()-1-i-(!is_stall), cycle, item);
     }
     ui->tablewidget_pipeline->resizeColumnsToContents();
-
+    
+    
 
     QString message = "-Step: Executing cycle number: " + QString::number(cycle+1);
     ui->textedit_log->setTextColor(QColor::fromRgb(204,0,0));

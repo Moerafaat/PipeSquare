@@ -39,7 +39,9 @@ private:
     CPU cpu;
     QFile file;
     QVector<Instruction> instructions;
-    QVector<QString> regfile, memory, IF_ID, ID_EX, EX_MEM, MEM_WB;
+    QVector<int> regfile, memory;
+    QVector<QString> IF_ID, ID_EX, EX_MEM, MEM_WB;
+    int pc;
 };
 
 #endif // MAINWINDOW_H

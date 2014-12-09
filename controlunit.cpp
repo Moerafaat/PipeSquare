@@ -46,15 +46,15 @@ void ControlUnit::setData0(int val){
     if(BranchStall&1) return;
     if(b4.WE && b4.WAddr0 == b1.rs) val = b4.WData0;    //Forwarding from the output of the Memory Read
     if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rs) val = b3.WData0;  //Forwarding from ALU output
-    if(b2.WE && b2.ALU_MEM && b3.MemAddr0 == b1.rs) {BranchStall|=1; return;}
+    if(b3.WE && b3.ALU_MEM && b3.WAddr0 == b1.rs) {BranchStall|=1; return;}
     if(b1.Mnemonic == InstType::JR) {PC = val; BranchStall |= 2;}
     b2.Op0 = val;
 }
 void ControlUnit::setData1(int val){
     if(BranchStall&1) return;
     if(b4.WE && b4.WAddr0 == b1.rs) val = b4.WData0;    //Forwarding from the output of the Memory Read
-    if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rs) val = b3.WData0;  //Forwarding from ALU output
-    else if(b2.WE && b2.ALU_MEM && b3.MemAddr0 == b1.rs) {BranchStall|=1; return;}
+    if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rt) val = b3.WData0;  //Forwarding from ALU output
+    else if(b3.WE && b3.ALU_MEM && b3.WAddr0 == b1.rt) {BranchStall|=1; return;}
     
     if(isIMMasOp1(b1.Mnemonic)) b2.Data0 = val;
     else b2.Op1 = val;
