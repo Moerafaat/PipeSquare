@@ -26,6 +26,7 @@ void CPU::SetVector(const QVector<Instruction> & inst){
 void CPU::Fetch(){
     if(CU.getPC() >= IMem.size() && nStages < 5) return;
     if(CU.getPC() >= IMem.size() || CU.getPC() < 0) throw(QString("PC out of bound"));
+    tempPC = CU.getPC();
     CU.Step(IMem[CU.getPC()]);
 }
 void CPU::Read(){
@@ -73,10 +74,10 @@ void CPU::Mem(){
 void CPU::WriteBack(){
     if(CU.getPC() >= IMem.size() && nStages < 1) return;
     if(CU.getWAddr0() < 0 || CU.getWAddr0() >= RegFile.RegisterCount) throw(QString("Register address out of bound"));
-    if (CU.getWE()) RegFile[CU.getWAddr0()] = CU.getWData0();
+    if(CU.getWE()) RegFile[CU.getWAddr0()] = CU.getWData0();
 }
 
-int CPU::Step(){
+bool CPU::Step(){
     nCycles++;
     switch(nCycles){      //You will like this one! :D
     default:    WriteBack();
@@ -91,6 +92,20 @@ int CPU::Step(){
     return nStages;
 }
 
-bool CPU::EOI(){
-    return nStages == 0;
+void CPU::getContext(QVector<int> &rf, QVector<int> &memory,
+                     QVector<int> &IF_ID, QVector<int> &ID_EX, QVector<int> &EX_MEM, QVector<int> &MEM_WB,
+                     int &PC, int &Cycles, bool &IsStall, bool &IsBranch){
+    rf.resize(RegFile.RegisterCount);
+    memory.resize(mem.WordCount);
+    for(int i = 0; i < RegFile.RegisterCount; i++) rf[i] = RegFile[i];
+    for(int i = 0; i < mem.WordCount; i++) memory[i] = mem[i];
+    CU.FillBuffers(IF_ID, ID_EX, EX_MEM, MEM_WB);
+    PC = tempPC;
+    Cycles = nCycles;
+    IsStall = BranchStallFlag&1;
+    IsBranch = BranchStallFlag&2;
+}
+
+bool CPU::isValidPC(){
+    return CU.getPC() >= 0 && CU.getPC() < IMem.size() || nStages == 4;
 }

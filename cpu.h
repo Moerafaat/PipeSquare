@@ -16,6 +16,7 @@ class CPU{
     int BranchStallFlag;
     int nCycles;
     int nStages;
+    int tempPC;
     void Fetch();
     void Read();
     void Execute();
@@ -27,9 +28,11 @@ public:
     CPU& operator=(const CPU&);
 
     void SetVector(const QVector<Instruction>&);
-
-    int Step();    //Returns Branch\Stall mask
-    bool EOI();     //End of Instructions
+    void getContext(QVector<int>&, QVector<int>&,
+                    QVector<int>&, QVector<int>&, QVector<int>&, QVector<int>&,
+                    int&, int&, bool&, bool&);
+    bool isValidPC();
+    bool Step();    //Returns Branch\Stall mask
 };
 
 #endif // CPU_H

@@ -1,5 +1,6 @@
 #include "controlunit.h"
 #include "cstring"
+#include<QVector>
 bool ControlUnit::isIMMasOp1(const InstType v){
     return v == ADDI || v == LW || v == SW || v == SUBI;
 }
@@ -13,6 +14,35 @@ int ControlUnit::PopBranchStallFlag(){
     int t = BranchStall;
     BranchStall = 0;
     return t;
+}
+
+void ControlUnit::FillBuffers(QVector<int> &if_id, QVector<int> &id_ex, QVector<int> &ex_mem, QVector<int> &mem_wb){
+    if_id[0] = b1.Mnemonic;
+    if_id[1] = b1.rs;
+    if_id[2] = b1.rt;
+    if_id[3] = b1.rd;
+    if_id[4] = b1.imm;
+    if_id[5] = b1.jaddr;
+
+    id_ex[0] = b2.WE;
+    id_ex[1] = b2.WAddr0;
+    id_ex[2] = b2.Data0;
+    id_ex[3] = b2.MemRW;
+    id_ex[4] = b2.ALU_MEM;
+    id_ex[5] = b2.ALUop;
+    id_ex[6] = b2.Op0;
+    id_ex[7] = b2.Op1;
+
+    ex_mem[0] = b3.WE;
+    ex_mem[1] = b3.WAddr0;
+    ex_mem[2] = b3.WData0;
+    ex_mem[3] = b3.MemRW;
+    ex_mem[4] = b3.ALU_MEM;
+    ex_mem[5] = b3.MemAddr0;
+
+    mem_wb[0] = b4.WE;
+    mem_wb[1] = b4.WAddr0;
+    mem_wb[2] = b4.WData0;
 }
 
 int ControlUnit::Step(const Instruction &inst){

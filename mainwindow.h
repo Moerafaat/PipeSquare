@@ -26,13 +26,7 @@ private slots:
 
 private:
     void InitializeBuffer(QTableWidget*,QVector<QString>);
-    void SetBuffer(QTableWidget*, QVector<QString>);
-    void fun(){
-        for(int i = 0; i < 10000; i++)
-            if(i == 10)
-                cpu.Step();
-            else cpu.Step();
-    }
+    void SetBuffer(QTableWidget*, QVector<int>);
 
     Ui::MainWindow *ui;
     Parser parser;
@@ -40,9 +34,10 @@ private:
     QFile file;
     QVector<Instruction> instructions;
     QVector<int> regfile, memory;
-    QVector<QString> IF_ID, ID_EX, EX_MEM, MEM_WB;
+    QVector<int> IF_ID, ID_EX, EX_MEM, MEM_WB;
     int pc, cycles;
     bool IsStall, IsBranch;
+    bool EOI;
 };
 
 #endif // MAINWINDOW_H

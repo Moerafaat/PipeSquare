@@ -52,6 +52,7 @@ class ControlUnit{
 public:
     ControlUnit();
     int PopBranchStallFlag();
+    void FillBuffers(QVector<int>&, QVector<int>&, QVector<int>&, QVector<int>&);
     int Step(const Instruction&);
     unsigned int nInstructions();
     unsigned int getPC();
