@@ -18,6 +18,7 @@ class ControlUnit{
         int ALUop;
         int IsComparator;
         bool IsIdle;    //Used only for stalling
+        bool LWSWFlag;
 
         int Op0, Op1;
         int Data0;
@@ -52,6 +53,7 @@ class ControlUnit{
 public:
     ControlUnit();
     int PopBranchStallFlag();
+    void reset();
     void FillBuffers(QVector<int>&, QVector<int>&, QVector<int>&, QVector<int>&);
     int Step(const Instruction&);
     unsigned int nInstructions();

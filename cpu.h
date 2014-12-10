@@ -32,6 +32,7 @@ public:
                     QVector<int>&, QVector<int>&, QVector<int>&, QVector<int>&,
                     int&, int&, bool&, bool&);
     bool isValidPC();
+    void reset();
     bool Step();    //Returns Branch\Stall mask
 };
 

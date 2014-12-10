@@ -66,6 +66,11 @@ void MainWindow::Initialize(){
 
     EOI = true;
     tempIsStall = false;
+    cpu.reset();
+
+    ui->actionCompile->setEnabled(false);
+    ui->actionStep->setEnabled(false);
+    ui->actionOpen->setEnabled(true);
 }
 
 void MainWindow::InitializeBuffer(QTableWidget* buffer, QVector<QString> labels){
@@ -110,6 +115,10 @@ void MainWindow::on_actionOpen_triggered(){
         message = "-File at path: " + path + " has been successfully opened.";
         ui->textedit_log->setTextColor(QColor::fromRgb(0,0,102));
         ui->textedit_log->append(message);
+
+        ui->actionCompile->setEnabled(true);
+        ui->actionStep->setEnabled(false);
+        ui->actionOpen->setEnabled(false);
     }
 }
 
@@ -161,6 +170,9 @@ void MainWindow::on_actionCompile_triggered(){
     if(instructions.size()){
         cpu.SetVector(instructions);
         EOI = false;
+        ui->actionCompile->setEnabled(false);
+        ui->actionStep->setEnabled(true);
+        ui->actionOpen->setEnabled(false);
     }
     else {
         QString message = "-File has no instructions";
@@ -239,7 +251,11 @@ void MainWindow::on_actionStep_triggered(){ //Actual
 
     for(int i=0;; i++){
         if(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()) < 0) break;
-        QString text = (i >= 2 || !IsStall) ? map[ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles-1)->text()] : ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles-1)->text();
+        //QString text = (i >= 2 || !IsStall) ? map[ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles-1)->text()] : ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles-1)->text();
+        QString text = ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles-1)->text();
+        //map[ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles-1)->text()];
+        if(IsStall && (text == "IF" || text == "ID")){}
+        else text = map[text];
         int idle_count = ui->tablewidget_pipeline->item(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles-1)->data(Qt::UserRole).toInt();
         if(idle_count == 0) text = " ";
         else if(idle_count != -1) {
@@ -255,7 +271,8 @@ void MainWindow::on_actionStep_triggered(){ //Actual
         item->setTextAlignment(Qt::AlignCenter);
         item->setFont(font);
         item->setForeground(color[text]);
-        if (i < 2 && IsStall) item->setBackgroundColor(QColor::fromRgb(224,224,224));
+        //if (i < 2 && IsStall)
+        if(IsStall && (text == "IF" || text == "ID")) item->setBackgroundColor(QColor::fromRgb(224,224,224));
         ui->tablewidget_pipeline->setItem(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles, item);
         ui->tablewidget_pipeline->scrollToItem(item);
         ui->tablewidget_pipeline->scrollToBottom();

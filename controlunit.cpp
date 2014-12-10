@@ -16,6 +16,13 @@ int ControlUnit::PopBranchStallFlag(){
     return t;
 }
 
+void ControlUnit::reset(){
+    PC = BranchStall = 0;
+    memset((char*)&b1, 0, sizeof(b1) + sizeof(b2) + sizeof(b3) + sizeof(b4));   //I am proud of myself :D :D
+    b2.IsIdle = b3.IsIdle = b4.IsIdle = true;
+    b2.WE = b2.MemRW = b3.WE = b3.MemRW = b4.WE = false;
+}
+
 void ControlUnit::FillBuffers(QVector<int> &if_id, QVector<int> &id_ex, QVector<int> &ex_mem, QVector<int> &mem_wb){
     if_id[0] = b1.Mnemonic;
     if_id[1] = b1.rs;
@@ -47,7 +54,7 @@ void ControlUnit::FillBuffers(QVector<int> &if_id, QVector<int> &id_ex, QVector<
 
 int ControlUnit::Step(const Instruction &inst){
     if(!b4.IsIdle) InstQ.dequeue();
-
+    if(BranchStall&1) return 0;
     InstQ.enqueue(inst);
     
     b1.Mnemonic = inst.Mnemonic;
@@ -57,7 +64,7 @@ int ControlUnit::Step(const Instruction &inst){
     b1.imm = inst.imm;
     b1.jaddr = inst.jaddr;
     
-    PC++;
+    if(~BranchStall&1) PC++;
     return 0;
 }
 
@@ -87,8 +94,8 @@ void ControlUnit::setData1(int val){
     if(BranchStall&1) return;
     if(b4.WE && b4.WAddr0 == b1.rt) val = b4.WData0;    //Forwarding from the output of the Memory Read
     if(b3.WE && !b3.ALU_MEM && b3.WAddr0 == b1.rt) val = b3.WData0;  //Forwarding from ALU output
-    else if(b3.WE && b3.ALU_MEM && b3.WAddr0 == b1.rt) {BranchStall|=1; return;}
-    
+    else if(b3.WE && b3.ALU_MEM && b3.WAddr0 == b1.rt && b1.Mnemonic != InstType::SW) {BranchStall|=1; return;}
+    else if(b3.WE && b3.ALU_MEM && b3.WAddr0 == b1.rt && b1.Mnemonic == InstType::SW) {b2.LWSWFlag = true; return;}
     if(isIMMasOp1(b1.Mnemonic)) b2.Data0 = val;
     else b2.Op1 = val;
 }
@@ -143,6 +150,8 @@ int ControlUnit::getWData0(){
 }
 
 void ControlUnit::Propagate12(){
+    b2.IsIdle = BranchStall&1;
+    //if(BranchStall&1) return;
     b2.WE = b1.Mnemonic != InstType::SW && b1.Mnemonic != InstType::BEQ && b1.Mnemonic != InstType::BLE &&
             b1.Mnemonic != InstType::J && b1.Mnemonic != InstType::JR;
     b2.MemRW = b1.Mnemonic == InstType::SW;
@@ -186,7 +195,7 @@ void ControlUnit::Propagate12(){
     else b2.WAddr0 = b1.rd;
     if(~BranchStall&2 && (b1.Mnemonic == InstType::J || b1.Mnemonic == InstType::JAL)) PC = b1.jaddr;
     if(BranchStall) b2.WE = b2.MemRW = false;
-    b2.IsIdle = BranchStall&1;
+
 }
 void ControlUnit::Propagate23(){
     b3.IsIdle = b2.IsIdle;
@@ -195,6 +204,8 @@ void ControlUnit::Propagate23(){
     b3.ALU_MEM = b2.ALU_MEM;
     b3.WAddr0 = b2.WAddr0;
     if(b2.IsDMemAddr) b3.WData0 = b2.Data0;
+    if(b2.LWSWFlag) b3.WData0 = b4.WData0;
+    b2.LWSWFlag = false;
 }
 void ControlUnit::Propagate34(){
     b4.IsIdle = b3.IsIdle;

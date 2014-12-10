@@ -109,3 +109,11 @@ void CPU::getContext(QVector<int> &rf, QVector<int> &memory,
 bool CPU::isValidPC(){
     return tempPC >= 0 && tempPC < IMem.size();
 }
+
+void CPU::reset(){
+    CU.reset();
+    nCycles = BranchStallFlag = 0;
+    nStages = 5;
+    for(int i = 0; i < RegFile.RegisterCount; i++) RegFile[i] = 0;
+    for(int i = 0; i < mem.WordCount; i++) mem[i] = 0;
+}
