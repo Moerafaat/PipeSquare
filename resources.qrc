@@ -4,6 +4,7 @@
         <file>step.png</file>
         <file>compile.png</file>
         <file>logo.png</file>
+        <file>eject.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>styles.qss</file>

@@ -24,7 +24,7 @@ void CPU::SetVector(const QVector<Instruction> & inst){
 }
 
 void CPU::Fetch(){
-    if(CU.getPC() >= IMem.size() && nStages < 5) return;
+    if(CU.getPC() >= IMem.size() && nStages < 5) {tempPC = -1; return;}
     if(CU.getPC() >= IMem.size() || CU.getPC() < 0) throw(QString("PC out of bound"));
     tempPC = CU.getPC();
     CU.Step(IMem[CU.getPC()]);
@@ -107,5 +107,5 @@ void CPU::getContext(QVector<int> &rf, QVector<int> &memory,
 }
 
 bool CPU::isValidPC(){
-    return CU.getPC() >= 0 && CU.getPC() < IMem.size() || nStages == 4;
+    return tempPC >= 0 && tempPC < IMem.size();
 }

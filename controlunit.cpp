@@ -143,8 +143,6 @@ int ControlUnit::getWData0(){
 }
 
 void ControlUnit::Propagate12(){
-    b2.IsIdle = BranchStall&1;
-    if(BranchStall&1) return;
     b2.WE = b1.Mnemonic != InstType::SW && b1.Mnemonic != InstType::BEQ && b1.Mnemonic != InstType::BLE &&
             b1.Mnemonic != InstType::J && b1.Mnemonic != InstType::JR;
     b2.MemRW = b1.Mnemonic == InstType::SW;
@@ -186,8 +184,9 @@ void ControlUnit::Propagate12(){
     if(b1.Mnemonic == InstType::JAL) {b2.WAddr0 = 31; b2.Data0 = PC;}
     else if(isIMMasOp1(b1.Mnemonic)) b2.WAddr0 = b1.rt;
     else b2.WAddr0 = b1.rd;
-    if(~BranchStall&2 && (b1.Mnemonic == InstType::J || b1.Mnemonic == InstType::JAL)) {PC = b1.jaddr; BranchStall|=2;}
-    if(BranchStall&2) b2.WE = b2.MemRW = false;
+    if(~BranchStall&2 && (b1.Mnemonic == InstType::J || b1.Mnemonic == InstType::JAL)) PC = b1.jaddr;
+    if(BranchStall) b2.WE = b2.MemRW = false;
+    b2.IsIdle = BranchStall&1;
 }
 void ControlUnit::Propagate23(){
     b3.IsIdle = b2.IsIdle;

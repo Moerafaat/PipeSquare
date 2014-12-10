@@ -24,9 +24,12 @@ private slots:
     void on_actionCompile_triggered();
     void on_actionStep_triggered();
 
+    void on_actionClear_triggered();
+
 private:
     void InitializeBuffer(QTableWidget*,QVector<QString>);
     void SetBuffer(QTableWidget*, QVector<int>);
+    void Initialize();
 
     Ui::MainWindow *ui;
     Parser parser;
@@ -36,7 +39,7 @@ private:
     QVector<int> regfile, memory;
     QVector<int> IF_ID, ID_EX, EX_MEM, MEM_WB;
     int pc, cycles;
-    bool IsStall, IsBranch;
+    bool tempIsStall, IsStall, IsBranch;
     bool EOI;
 };
 

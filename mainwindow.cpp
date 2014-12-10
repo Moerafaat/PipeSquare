@@ -12,12 +12,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     QIcon icon(":/images/logo.png");
     QWidget::setWindowIcon(icon);
-    QFont font("Helvetica", 10);
     EOI = true;
     IF_ID.resize(6);
     ID_EX.resize(8);
     EX_MEM.resize(6);
     MEM_WB.resize(3);
+
+    Initialize();
+}
+
+MainWindow::~MainWindow(){
+    delete ui;
+}
+
+void MainWindow::Initialize(){
+    QFont font("Helvetica", 10);
 
     ui->textedit_log->setReadOnly(true);
     ui->textedit_editor->setReadOnly(true);
@@ -40,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tablewidget_pipeline->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tablewidget_pipeline->setColumnCount(0);
+    ui->tablewidget_pipeline->setRowCount(0);
     ui->tablewidget_pipeline->setShowGrid(false);
 
     QVector<QString> IFID_labels = {"Mnemonic", "Rs", "Rt", "Rd", "Imm", "Jaddr"};
@@ -53,10 +63,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     QVector<QString> MEMWB_labels = {"WE", "WAddr", "WData"};
     InitializeBuffer(ui->tablewidget_MEMWB,MEMWB_labels);
-}
 
-MainWindow::~MainWindow(){
-    delete ui;
+    EOI = true;
+    tempIsStall = false;
 }
 
 void MainWindow::InitializeBuffer(QTableWidget* buffer, QVector<QString> labels){
@@ -122,6 +131,7 @@ void MainWindow::on_actionCompile_triggered(){
         QStringList elements = row.split(" ");
         ui->textedit_editor->moveCursor (QTextCursor::End);
         ui->textedit_editor->insertHtml("<span style='color:red'>" + elements[0] + "</span>");
+        for(int i = elements[0].size(); i < 7; i++) ui->textedit_editor->insertPlainText(" ");
         ui->textedit_editor->insertPlainText("\t");
         ui->textedit_editor->moveCursor (QTextCursor::End);
         row = "";
@@ -162,6 +172,8 @@ void MainWindow::on_actionCompile_triggered(){
 void MainWindow::on_actionStep_triggered(){ //Actual
     QMap<QString, QString> map;
     QMap<QString, QColor> color;
+    QMap<int, QString> mnem;
+
     map.insert("IF", "ID"); color.insert("IF",QColor::fromRgb(0,0,0));
     map.insert("ID", "EX"); color.insert("ID", QColor::fromRgb(0,0,204));
     map.insert("EX", "MEM"); color.insert("EX", QColor::fromRgb(255,0,0));
@@ -169,6 +181,13 @@ void MainWindow::on_actionStep_triggered(){ //Actual
     map.insert("WB", " "); color.insert("WB", QColor::fromRgb(255,255,0));
     map.insert(" ", " "); color.insert(" ", QColor::fromRgb(255,255,255));
     map.insert("IDLE", "IDLE"); color.insert("IDLE", QColor::fromRgb(102,51,0));
+
+    mnem.insert(0,"ADD"); mnem.insert(1,"ADDI"); mnem.insert(2,"XOR");
+    mnem.insert(3,"LW"); mnem.insert(4,"SW"); mnem.insert(5,"BLE");
+    mnem.insert(6,"J"); mnem.insert(7,"SLT"); mnem.insert(8,"JAL");
+    mnem.insert(9,"JR"); mnem.insert(10,"BEQ"); mnem.insert(11,"OR");
+    mnem.insert(12,"SUBI");
+
     QTableWidgetItem *item;
     QFont font("Helvetica", 10, QFont::Bold);
 
@@ -180,9 +199,9 @@ void MainWindow::on_actionStep_triggered(){ //Actual
     }
     EOI = !cpu.Step();
 
-    cpu.getContext(regfile, memory, IF_ID, ID_EX, EX_MEM, MEM_WB, pc, cycles, IsStall, IsBranch);
+    IsStall = tempIsStall;
+    cpu.getContext(regfile, memory, IF_ID, ID_EX, EX_MEM, MEM_WB, pc, cycles, tempIsStall, IsBranch);
     cycles--;
-
     for(int i=0; i<ui->tablewidget_regfile->rowCount(); i++){
         item = new QTableWidgetItem(QString::number(regfile[i]));
         item->setTextAlignment(Qt::AlignCenter);
@@ -199,10 +218,12 @@ void MainWindow::on_actionStep_triggered(){ //Actual
     SetBuffer(ui->tablewidget_IDEX,ID_EX);
     SetBuffer(ui->tablewidget_EXMEM,EX_MEM);
     SetBuffer(ui->tablewidget_MEMWB,MEM_WB);
+    item = new QTableWidgetItem(mnem[IF_ID[0]]);
+    item->setTextAlignment(Qt::AlignCenter);
+    ui->tablewidget_IFID->setItem(1,0,item);
 
     ui->tablewidget_pipeline->insertColumn(ui->tablewidget_pipeline->columnCount());
     ui->tablewidget_pipeline->setHorizontalHeaderItem(ui->tablewidget_pipeline->columnCount()-1, new QTableWidgetItem("Cyc " + QString::number((cycles+1))));
-
     if(!IsStall && cpu.isValidPC()){
         ui->tablewidget_pipeline->insertRow(ui->tablewidget_pipeline->rowCount());
         item = new QTableWidgetItem(instructions[pc].RawInst);
@@ -212,6 +233,8 @@ void MainWindow::on_actionStep_triggered(){ //Actual
         item->setTextAlignment(Qt::AlignCenter);
         item->setFont(font);
         ui->tablewidget_pipeline->setItem(ui->tablewidget_pipeline->rowCount()-1, cycles, item);
+        ui->tablewidget_pipeline->scrollToItem(item);
+        ui->tablewidget_pipeline->scrollToBottom();
     }
 
     for(int i=0;; i++){
@@ -234,6 +257,24 @@ void MainWindow::on_actionStep_triggered(){ //Actual
         item->setForeground(color[text]);
         if (i < 2 && IsStall) item->setBackgroundColor(QColor::fromRgb(224,224,224));
         ui->tablewidget_pipeline->setItem(ui->tablewidget_pipeline->rowCount()-1-i-(!IsStall && cpu.isValidPC()), cycles, item);
+        ui->tablewidget_pipeline->scrollToItem(item);
+        ui->tablewidget_pipeline->scrollToBottom();
     }
     ui->tablewidget_pipeline->resizeColumnsToContents();
+}
+
+void MainWindow::on_actionClear_triggered(){
+    ui->textedit_editor->clear();
+    ui->textedit_log->clear();
+    ui->tablewidget_regfile->clear();
+    ui->tablewidget_memory->clear();
+    ui->tablewidget_pipeline->clear();
+    ui->tablewidget_IFID->clear();
+    ui->tablewidget_IDEX->clear();
+    ui->tablewidget_EXMEM->clear();
+    ui->tablewidget_MEMWB->clear();
+    Initialize();
+    QString message = "Editor, tables, and log have been cleared";
+    ui->textedit_log->setTextColor(QColor::fromRgb(0,0,102));
+    ui->textedit_log->append(message);
 }
